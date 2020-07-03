@@ -4,18 +4,16 @@ import Routes from './routes/routes';
 
 import GlobalStyle from './styles/global';
 
-import { AuthProvider } from './hooks/AuthContext';
-import ToastContainer from './components/ToastContainer/index';
+import AppProvider from './hooks/index';
 
 const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <AuthProvider>
+        <AppProvider>
           <Routes />
-        </AuthProvider>
-        <ToastContainer />
+        </AppProvider>
       </BrowserRouter>
     </>
   );
