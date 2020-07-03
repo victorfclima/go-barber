@@ -5,6 +5,7 @@ import Routes from './routes/routes';
 import GlobalStyle from './styles/global';
 
 import { AuthProvider } from './hooks/AuthContext';
+import ToastContainer from './components/ToastContainer/index';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <AuthProvider>
           <Routes />
         </AuthProvider>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );
