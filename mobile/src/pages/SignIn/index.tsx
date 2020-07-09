@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -21,49 +22,52 @@ import {
   CreateAccountButtonText,
 } from './styles';
 
-const SignIn: React.FC = () => (
-  <>
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={{ flex: 1 }}
-      enabled
-    >
-      <ScrollView
-        contentContainerStyle={{ flex: 1 }}
-        keyboardShouldPersistTaps="handled"
+const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+  return (
+    <>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
+        enabled
       >
-        <Container>
-          <Image source={logoImg} />
-          <View>
-            <Title>Faça seu logon</Title>
-          </View>
-          <Input name="email" icon="mail" placeholder="E-mail" />
+        <ScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <Container>
+            <Image source={logoImg} />
+            <View>
+              <Title>Faça seu logon</Title>
+            </View>
+            <Input name="email" icon="mail" placeholder="E-mail" />
 
-          <Input
-            name="password"
-            secureTextEntry
-            icon="lock"
-            placeholder="Senha"
-          />
-          <Button
-            onPress={() => {
-              console.log('ok');
-            }}
-          >
-            Entrar
-          </Button>
-          <ForgotPassword>
-            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-          </ForgotPassword>
-        </Container>
-      </ScrollView>
-    </KeyboardAvoidingView>
+            <Input
+              name="password"
+              secureTextEntry
+              icon="lock"
+              placeholder="Senha"
+            />
+            <Button
+              onPress={() => {
+                console.log('ok');
+              }}
+            >
+              Entrar
+            </Button>
+            <ForgotPassword>
+              <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+            </ForgotPassword>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
 
-    <CreateAccountButton>
-      <Icon name="log-in" size={20} color="#f99000" />
-      <CreateAccountButtonText>Criar uma conta </CreateAccountButtonText>
-    </CreateAccountButton>
-  </>
-);
+      <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
+        <Icon name="log-in" size={20} color="#f99000" />
+        <CreateAccountButtonText>Criar uma conta </CreateAccountButtonText>
+      </CreateAccountButton>
+    </>
+  );
+};
 
 export default SignIn;
