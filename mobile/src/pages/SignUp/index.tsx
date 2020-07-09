@@ -18,8 +18,11 @@ import logoImg from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationsErrors';
+import api from '../../services/api';
 
-import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
+import {
+ Container, Title, BackToSignIn, BackToSignInText
+} from './styles';
 
 interface SignInFormData {
   name: string;
@@ -52,9 +55,13 @@ const SignUp: React.FC = () => {
         abortEarly: false,
       });
 
-      // await api.post('/users', data);
+      await api.post('/users', data);
+      Alert.alert(
+        'Cadastro realizado com sucesso',
+        'Você já pode fazer logon an aplicação',
+      );
 
-      // history.push('/');
+      navigation.goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -127,7 +134,7 @@ const SignUp: React.FC = () => {
                   formRef.current?.submitForm();
                 }}
               >
-                Entrar
+                Cadastrar
               </Button>
             </Form>
           </Container>
